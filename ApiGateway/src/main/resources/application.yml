@@ -10,6 +10,14 @@ spring:
           uri: lb://EDUCATION-SERVICE
           predicates:
             - Path=/education/**
+          filters:
+            - AuthenticationFilter
+        - id: AUTHENTICATION-SERVICE
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/auth/**
+jwt:
+  secret-key: aZQzGvN+f8ApYs2cJpcTHDMkpzJLDkWtcXJwVgxKlQo=
 eureka:
   client:
     service-url:

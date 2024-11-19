@@ -17,6 +17,7 @@
     <properties>
         <java.version>17</java.version>
         <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <jwt-common.version>1.0-SNAPSHOT</jwt-common.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -53,6 +54,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>ru.rogoff</groupId>
+            <artifactId>jwt-common</artifactId>
+            <version>${jwt-common.version}</version>
         </dependency>
     </dependencies>
 
