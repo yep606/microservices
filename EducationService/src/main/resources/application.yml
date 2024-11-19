@@ -1,0 +1,16 @@
+spring:
+    application:
+        name: EDUCATION-SERVICE
+server:
+    port: 0
+eureka:
+    client:
+        service-url:
+            defaultZone: http://localhost:8761/eureka
+
+integration:
+    course:
+        host: http://COURSE-SERVICE
+    main-education:
+        host: http://MAIN-EDUCATION-SERVICE
+
