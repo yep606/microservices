@@ -6,9 +6,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import reactor.core.publisher.Mono;
 import ru.rogoff.dto.EducationResponseDto;
-import ru.rogoff.educationservice.service.EducationService;
+import ru.rogoff.educationservice.service.EducationServiceImpl;
 
 import java.util.UUID;
 
@@ -18,11 +17,16 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class EducationController {
 
-    private final EducationService service;
+    private final EducationServiceImpl service;
 
+//    @GetMapping
+//    public Mono<EducationResponseDto> getEducation(@PathVariable UUID cvUuid) {
+//        log.info("Incoming GET request in EducationController with cvUuid {}", cvUuid);
+//        return service.getEducation(cvUuid);
+//    }
     @GetMapping
-    public Mono<EducationResponseDto> getEducation(@PathVariable UUID cvUuid) {
+    public EducationResponseDto getEducation(@PathVariable UUID cvUuid) {
         log.info("Incoming GET request in EducationController with cvUuid {}", cvUuid);
-        return service.getEducation(cvUuid);
+        return service.getAsyncEducation(cvUuid);
     }
 }
