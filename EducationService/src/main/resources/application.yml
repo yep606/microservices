@@ -1,29 +1,36 @@
 spring:
-    application:
-        name: EDUCATION-SERVICE
+  application:
+    name: EDUCATION-SERVICE
 server:
-    port: 0
+  port: 0
 eureka:
-    client:
-        service-url:
-            defaultZone: http://localhost:8761/eureka
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 
 integration:
-    course:
-        host: http://COURSE-SERVICE
-    main-education:
-        host: http://MAIN-EDUCATION-SERVICE
+  course:
+    host: http://COURSE-SERVICE
+  main-education:
+    host: http://MAIN-EDUCATION-SERVICE
 
 resilience4j:
-    circuitbreaker:
-        instances:
-            course-service:
-                failureRateThreshold: 50
-                automaticTransitionFromOpenToHalfOpenEnabled: true
-                waitDurationInOpenState: 10s
-                slidingWindowType: COUNT_BASED
-                slidingWindowSize: 4
-                minimumNumberOfCalls: 1
-                eventConsumerBufferSize: 10
-#                register-health-indicator: true
-                permittedNumberOfCallsInHalfOpenState: 3
+  circuitbreaker:
+    circuit-breaker-aspect-order: 2
+    instances:
+      course-service:
+        failureRateThreshold: 50
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 30s
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 2
+        minimumNumberOfCalls: 1
+        eventConsumerBufferSize: 10
+        #                register-health-indicator: true
+        permittedNumberOfCallsInHalfOpenState: 3
+  retry:
+    retry-aspect-order: 1
+    instances:
+      course-service:
+        maxAttempts: 2
+        waitDuration: 1000
