@@ -14,3 +14,16 @@ integration:
     main-education:
         host: http://MAIN-EDUCATION-SERVICE
 
+resilience4j:
+    circuitbreaker:
+        instances:
+            course-service:
+                failureRateThreshold: 50
+                automaticTransitionFromOpenToHalfOpenEnabled: true
+                waitDurationInOpenState: 10s
+                slidingWindowType: COUNT_BASED
+                slidingWindowSize: 4
+                minimumNumberOfCalls: 1
+                eventConsumerBufferSize: 10
+#                register-health-indicator: true
+                permittedNumberOfCallsInHalfOpenState: 3

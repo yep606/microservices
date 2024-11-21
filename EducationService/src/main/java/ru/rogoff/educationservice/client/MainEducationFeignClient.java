@@ -8,7 +8,7 @@ import ru.rogoff.dto.MainEducationResponseDto;
 import java.util.List;
 import java.util.UUID;
 
-@FeignClient("MAIN-EDUCATION-SERVICE")
+@FeignClient(name = "MAIN-EDUCATION-SERVICE")
 public interface MainEducationFeignClient {
     @GetMapping("/main-education/{cvUuid}")
     List<MainEducationResponseDto> get(@PathVariable UUID cvUuid);

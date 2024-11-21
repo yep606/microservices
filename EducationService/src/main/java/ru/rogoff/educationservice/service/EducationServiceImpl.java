@@ -13,7 +13,6 @@ import ru.rogoff.educationservice.client.MainEducationClient;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 @Service
 @Slf4j
@@ -36,14 +35,8 @@ public class EducationServiceImpl {
     }
     @SneakyThrows
     public EducationResponseDto getAsyncEducation(UUID cvUuid) {
-        CompletableFuture<List<CourseResponseDto>> coursesFuture = service.fetchCourses(cvUuid);
-        log.info("Async call");
-        CompletableFuture<List<MainEducationResponseDto>> mainEducationFuture = service.fetchMainEducation(cvUuid);
-
-        CompletableFuture.allOf(coursesFuture, mainEducationFuture).join();
-
-        List<CourseResponseDto> courses = coursesFuture.get();
-        List<MainEducationResponseDto> mainEducation = mainEducationFuture.get();
+        List<CourseResponseDto> courses = service.fetchCourses(cvUuid);
+        List<MainEducationResponseDto> mainEducation = service.fetchMainEducation(cvUuid);
 
         return EducationResponseDto.builder()
                 .courses(courses)
