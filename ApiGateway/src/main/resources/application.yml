@@ -1,6 +1,11 @@
 server:
   port: 0
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8080/realms/microservices/protocol/openid-connect/certs
   application:
     name: API-GATEWAY-SERVICE
   cloud:
@@ -10,14 +15,11 @@ spring:
           uri: lb://EDUCATION-SERVICE
           predicates:
             - Path=/education/**
-          filters:
-            - AuthenticationFilter
+
         - id: AUTHENTICATION-SERVICE
           uri: lb://AUTH-SERVICE
           predicates:
             - Path=/auth/**
-jwt:
-  secret-key: aZQzGvN+f8ApYs2cJpcTHDMkpzJLDkWtcXJwVgxKlQo=
 eureka:
   client:
     service-url:
