@@ -10,6 +10,9 @@ import ru.rogoff.dto.EducationResponseDto;
 import ru.rogoff.dto.MainEducationResponseDto;
 import ru.rogoff.educationservice.client.CoursesClient;
 import ru.rogoff.educationservice.client.MainEducationClient;
+import ru.rogoff.educationservice.config.NotificationProducer;
+import ru.rogoff.kafka.EventType;
+import ru.rogoff.kafka.NotificationEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,6 +25,7 @@ public class EducationServiceImpl {
     private final CoursesClient coursesClient;
     private final MainEducationClient mainEducationClient;
     private final AsyncEducationService service;
+    private final NotificationProducer producer;
 
     public Mono<EducationResponseDto> getEducation(UUID cvUuid) {
         return Mono.zip(
@@ -38,9 +42,16 @@ public class EducationServiceImpl {
         List<CourseResponseDto> courses = service.fetchCourses(cvUuid);
         List<MainEducationResponseDto> mainEducation = service.fetchMainEducation(cvUuid);
 
+        NotificationEvent event = new NotificationEvent();
+        event.setId("12345");
+        event.setMessage("This is a test notification.");
+        event.setType(EventType.GET_REQUEST);
+        producer.send(event);
+
         return EducationResponseDto.builder()
                 .courses(courses)
                 .mainEducations(mainEducation)
                 .build();
+
     }
 }
