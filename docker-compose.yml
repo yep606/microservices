@@ -51,3 +51,15 @@ services:
       - "9093:9093"
     volumes:
       - ./kafka3_data:/bitnami/kafka
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    ports:
+      - "8080:8080"
+    depends_on:
+      - kafka-1
+      - kafka-2
+      - kafka-3
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka-1:9192,kafka-2:9192,kafka-3:9192

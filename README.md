@@ -12,3 +12,7 @@ docker compose up
 ./kafka-console-producer.sh --topic payment-created-events-topic --bootstrap-server localhost:9093,localhost:9092,localhost:9091
 
 ./kafka-console-consumer.sh --topic payment-created-events-topic --from-beginning --bootstrap-server localhost:9093,localhost:9092,localhost:9091
+
+#Kafka UI
+https://docs.kafka-ui.provectus.io/
+Access the web UI after docker compose start at http://localhost:8080
