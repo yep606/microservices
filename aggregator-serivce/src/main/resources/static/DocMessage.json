@@ -1,0 +1,11 @@
+{
+  "message": "Hello, firstName()! Your order number is: #int(1,100)",
+  "phoneNumber": "phoneNumber()",
+  "phoneVariation": "+90 int(300,399) int(100,999) int(10-99) int(10,99)",
+  "status": "enum(active, disabled)",
+  "name": {
+    "first": "firstName()",
+    "middle": "middleName()",
+    "last": "lastName()"
+  }
+}
