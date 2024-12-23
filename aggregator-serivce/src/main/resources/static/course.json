@@ -1,0 +1,10 @@
+{
+  "sequenceNumber": 1,
+  "periodFrom": "2021-09",
+  "periodTo": "2022-06",
+  "presentTime": false,
+  "school": "Global University",
+  "courseName": "Advanced Data Structures",
+  "description": "An in-depth course on data structures and their applications in modern software development.",
+  "certificateUrl": "https://www.globaluniversity.com/certificates/12345"
+}

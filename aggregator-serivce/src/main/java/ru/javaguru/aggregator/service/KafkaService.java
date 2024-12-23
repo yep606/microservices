@@ -1,26 +1,22 @@
 package ru.javaguru.aggregator.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.stereotype.Service;
-import ru.javaguru.aggregator.converter.KafkaMessageConverter;
-import ru.javaguru.aggregator.dto.KafkaMessage;
+import ru.javaguru.aggregator.processor.KafkaMessageProcessor;
+import ru.javaguru.aggregator.processor.KafkaMessageProcessorRegistry;
 
 
 @Slf4j
 @Service
 public class KafkaService {
-
-    private final KafkaMessageConverter converter;
-    private final KafkaMessageProcessor processor;
+    private final KafkaMessageProcessorRegistry registry;
 
     @Autowired
-    public KafkaService(KafkaMessageConverter converter, KafkaMessageProcessor processor) {
-        this.converter = converter;
-        this.processor = processor;
+    public KafkaService(KafkaMessageProcessorRegistry registry) {
+        this.registry = registry;
     }
 
     @KafkaListener(topics = "doc-info", groupId = "aggregator-group")
@@ -28,18 +24,8 @@ public class KafkaService {
         processMessage(serviceName, message);
     }
 
-    private void processMessage(String serviceName, String kafkaMessage) {
-        try {
-            KafkaMessage message = converter.convert(serviceName, kafkaMessage);
-            message.acceptProcessor(processor);
-
-        } catch (JsonProcessingException ex) {
-            logError(ex);
-        }
-    }
-
-
-    private void logError(Exception ex) {
-        log.info("Exception occurred while process kafka message: {}", ex);
+    private void processMessage(String serviceName, String message) {
+        KafkaMessageProcessor processor = registry.getProcessor(serviceName);
+        processor.process(message);
     }
 }
