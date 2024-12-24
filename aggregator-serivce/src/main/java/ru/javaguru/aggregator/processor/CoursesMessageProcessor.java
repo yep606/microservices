@@ -10,6 +10,7 @@ import ru.javaguru.aggregator.converter.OrderMapper;
 import ru.javaguru.aggregator.model.Course;
 
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -23,7 +24,7 @@ public class CoursesMessageProcessor implements KafkaMessageProcessor {
         this.messageConverter = messageConverter;
     }
     @Override
-    public void process(String message) {
+    public void process(UUID reqUuid, String message) {
         try {
             List<Course> courses = messageConverter.convertList(message, new TypeReference<>() {});
             log.info("Map to Courses entity: {}", courses);

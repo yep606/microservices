@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.YearMonth;
+import java.util.UUID;
 
 @Entity
 @Table(name = "experiences")
@@ -22,6 +23,9 @@ public class Experience {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private UUID reqUuid;
 
     @Column(nullable = false)
     private Integer sequenceNumber;

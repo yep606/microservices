@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.javaguru.aggregator.dto.DocumentRequestDto;
 import ru.javaguru.aggregator.service.DocumentService;
 
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -17,10 +19,11 @@ public class MainController {
 
     private final DocumentService service;
 
+    //todo: validate reqUuid
     @PostMapping("/collect")
-    public ResponseEntity<String> collect(DocumentRequestDto dto) {
+    public ResponseEntity<String> collect(UUID reqUuid, DocumentRequestDto dto) {
         log.debug("Input data to collect info: {}", dto);
-        service.collectData(dto);
+        service.collectData(reqUuid, dto);
         return ResponseEntity.ok("OK");
     }
 }

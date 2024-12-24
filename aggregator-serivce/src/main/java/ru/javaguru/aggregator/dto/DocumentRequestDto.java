@@ -10,7 +10,6 @@ import java.util.UUID;
 @Builder
 @Jacksonized
 public class DocumentRequestDto {
-    UUID reqId;
     UUID uuid;
     DocType type;
 }
