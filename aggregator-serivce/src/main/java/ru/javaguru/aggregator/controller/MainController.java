@@ -24,6 +24,7 @@ public class MainController {
     public ResponseEntity<String> collect(UUID reqUuid, DocumentRequestDto dto) {
         log.debug("Input data to collect info: {}", dto);
         service.collectData(reqUuid, dto);
+
         return ResponseEntity.ok("OK");
     }
 }

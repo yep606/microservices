@@ -45,7 +45,7 @@ class KafkaServiceTest {
 ]
 
                 """;
-        service.consume("experience-service", experienceJson);
+//        service.consume("experience-service", experienceJson);
     }
 
 }

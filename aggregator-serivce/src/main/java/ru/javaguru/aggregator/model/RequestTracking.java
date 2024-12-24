@@ -38,6 +38,4 @@ public class RequestTracking {
 
     @Enumerated(EnumType.STRING)
     private RequestStatus status;
-
-    private Date timeout;
 }

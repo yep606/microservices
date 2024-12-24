@@ -21,6 +21,7 @@ public class DocumentService {
 
     private final RequestTrackingRepo repo;
     private final DocumentProducer producer;
+    private final AsyncTimeoutHandler handler;
 
     public void collectData(UUID reqUuid, DocumentRequestDto dto) {
         List<ServiceName> services = ServicesMapperUtils.mapToServices(dto.getType());
@@ -30,9 +31,10 @@ public class DocumentService {
         tracking.setDocType(dto.getType());
         tracking.setExpectedServices(services);
         tracking.setStatus(RequestStatus.PENDING);
-        tracking.setTimeout(new Date(System.currentTimeMillis() + 30000)); // 30s timeout
 
         repo.save(tracking);
         producer.send(reqUuid, dto);
+
+        handler.handleTimeout(reqUuid, 15000); // 15s timeout
     }
 }

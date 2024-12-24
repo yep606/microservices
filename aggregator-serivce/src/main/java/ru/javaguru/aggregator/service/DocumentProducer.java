@@ -22,8 +22,8 @@ public class DocumentProducer {
     }
 
     public void send(UUID reqUuid, DocumentRequestDto message) {
-        Header reqUuidHeader = new RecordHeader("reqUuid", reqUuid.toString().getBytes(StandardCharsets.UTF_8));
         ProducerRecord<Object, DocumentRequestDto> record = new ProducerRecord<>(TOPIC, message);
+        Header reqUuidHeader = new RecordHeader("reqUuid", reqUuid.toString().getBytes(StandardCharsets.UTF_8));
         record.headers().add(reqUuidHeader);
 
         kafkaTemplate.send(TOPIC, record);
