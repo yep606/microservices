@@ -30,3 +30,8 @@ spring:
       bootstrap-servers: localhost:9091,localhost:9092,localhost:9093
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+logging:
+  level:
+    com.netflix.discovery: ERROR
+    com.netflix.eureka: ERROR
+    com.netflix.appinfo: ERROR

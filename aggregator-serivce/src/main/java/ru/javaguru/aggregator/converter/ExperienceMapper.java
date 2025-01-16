@@ -12,7 +12,6 @@ import java.util.UUID;
 @Mapper(componentModel = "spring")
 public interface ExperienceMapper {
 
-    @Mapping(target = "reqUuid", ignore = true)
     ExperienceRequestDto toDto(Experience experience);
 
     @Mapping(target = "reqUuid", source = "reqUuid")

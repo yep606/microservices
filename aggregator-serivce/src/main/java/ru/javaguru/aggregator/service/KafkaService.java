@@ -51,6 +51,7 @@ public class KafkaService {
         postProcessRequestTracking(requestTracking);
     }
 
+    //todo: check CANCELLED OR COMPLETED status by timeoutHandler, important case
     private void postProcessRequestTracking(RequestTracking tracking) {
         if (tracking.getExpectedServices().size() == tracking.getReceivedServices().size()) {
             tracking.setStatus(COMPLETED);

@@ -11,7 +11,6 @@ import java.util.UUID;
 @Mapper(componentModel = "spring")
 public interface CourseMapper {
 
-    @Mapping(target = "reqUuid", ignore = true)
     CourseResponseDto toDto(Course course);
 
     @Mapping(target = "reqUuid", source = "reqUuid")
